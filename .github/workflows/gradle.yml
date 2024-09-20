@@ -23,10 +23,10 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          
+
       - name: Increment patch version
         run: |
-          VERSION=$(grep 'version =' build.gradle.kts | sed 's/.*= "\(.*\)"/\1/')
+          VERSION=$(awk -F ' = "' '{if ($1 ~ /version/) print $2}' build.gradle.kts | tr -d '"')
           echo "Current version: $VERSION"
           IFS='.' read -r major minor patch <<< "$VERSION"
           new_patch=$((patch + 1))
@@ -40,3 +40,6 @@ jobs:
 
       - name: Build with Gradle Wrapper
         run: ./gradlew build
+
+      - name: Package into JAR
+        run: ./gradlew shadowJar
