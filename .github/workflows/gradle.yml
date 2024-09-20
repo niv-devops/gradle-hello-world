@@ -26,14 +26,7 @@ jobs:
 
       - name: Increment patch version
         run: |
-          VERSION=$(awk -F ' = "' '{if ($1 ~ /version/) print $2}' build.gradle.kts | tr -d '"')
-          echo "Current version: $VERSION"
-          IFS='.' read -r major minor patch <<< "$VERSION"
-          new_patch=$((patch + 1))
-          new_version="$major.$minor.$new_patch"
-          echo "New version: $new_version"
-          echo "version=$new_version" >> $GITHUB_OUTPUT
-          sed -i "s/version = \".*\"/version = \"$new_version\"/" build.gradle.kts
+          ./increment_version.sh
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@cf8c4352603fd732e2c354bcdbe793fe7dc885dc # V4.1.0
