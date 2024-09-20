@@ -54,6 +54,8 @@ jobs:
 
       - name: Push changes back to repo
         run: |
+          git config user.email "action@github.com"
+          git config user.name "GitHub Actions"
           git add .
           git commit -m "Workflow complete. Changed version to ${{ steps.increment_version.outputs.version }}"
           git push origin master
