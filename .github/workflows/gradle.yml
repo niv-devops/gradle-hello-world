@@ -36,10 +36,14 @@ jobs:
         uses: gradle/actions/setup-gradle@cf8c4352603fd732e2c354bcdbe793fe7dc885dc # V4.1.0
 
       - name: Build with Gradle Wrapper
-        run: ./gradlew build
+        run: ./gradlew build -DsourceSets.main.java.srcDirs=src/main/java
+        
+      - name: List files in build/libs
+        run: |
+          ls gradle-hello-world/build/libs
 
       - name: Package into JAR
-        run: ./gradlew clean shadowJar --info 
+        run: ./gradlew shadowJar --info 
 
       - name: Create Docker image
         run: |
