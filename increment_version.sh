@@ -7,4 +7,4 @@ new_patch=$((patch + 1))
 new_version="$major.$minor.$new_patch"
 echo "New version: $new_version"
 echo "version=$new_version" >> $GITHUB_OUTPUT
-sed -i "s/version = \".*\"/version = \"$new_version\"/" build.gradle.kts
+sed -i "s/version = \".*\"/version = \"$new_version\"/" ./build.gradle.kts
