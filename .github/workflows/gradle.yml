@@ -36,11 +36,7 @@ jobs:
         uses: gradle/actions/setup-gradle@cf8c4352603fd732e2c354bcdbe793fe7dc885dc # V4.1.0
 
       - name: Build with Gradle Wrapper
-        run: ./gradlew build -DsourceSets.main.java.srcDirs=src/main/java
-        
-      - name: List files in build/libs
-        run: |
-          ls gradle-hello-world/build/libs
+        run: ./gradlew build
 
       - name: Package into JAR
         run: ./gradlew shadowJar --info 
@@ -55,10 +51,6 @@ jobs:
       - name: Publish Docker image
         run: |
           docker push ${{ env.DOCKER_HUB_USER }}/${{ env.DOCKER_IMAGE_NAME }}:${{ steps.increment_version.outputs.version }}
-
-      - name: Run Docker container
-        run: |
-          docker run --rm --user 1001:1001 ${{ env.DOCKER_HUB_USER }}/${{ env.DOCKER_IMAGE_NAME }}:${{ steps.increment_version.outputs.version }}
 
       - name: Push changes back to repo
         run: |
