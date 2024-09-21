@@ -23,11 +23,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Increment patch version
+        if: github.event_name != 'pull_request'
         id: increment_version
         run: |
           ./scripts/increment_version.sh
           
       - name: Login to Docker Hub
+        if: github.event_name != 'pull_request'
         uses: docker/login-action@v3
         with:
           username: ${{ env.DOCKER_HUB_USER }}
@@ -44,6 +46,7 @@ jobs:
           push: true
 
       - name: Push changes back to repo
+        if: github.event_name != 'pull_request'
         run: ./scripts/push_to_repo.sh ${{ steps.increment_version.outputs.version }}
           
       - name: Run Docker container
