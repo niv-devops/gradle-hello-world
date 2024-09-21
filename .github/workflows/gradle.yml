@@ -44,10 +44,11 @@ jobs:
       - name: List files in build/libs
         run: |
           ls ./build/libs
-
+          
       - name: Create Docker image
         run: |
-          docker build -t ${{ env.DOCKER_HUB_USER }}/${{ env.DOCKER_IMAGE_NAME }}:${{ steps.increment_version.outputs.version }} .
+          docker build -t ${{ env.DOCKER_HUB_USER }}/${{ env.DOCKER_IMAGE_NAME }}:${{ steps.increment_version.outputs.version }} \
+          --build-arg JAR_VERSION=${{ steps.increment_version.outputs.version }} .
 
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u ${{ env.DOCKER_HUB_USER }} --password-stdin
@@ -63,3 +64,7 @@ jobs:
           git add .
           git commit -m "Workflow complete. Changed version to ${{ steps.increment_version.outputs.version }}"
           git push origin master
+          
+      - name: Run Docker container
+        run: |
+          docker run --rm --user 1001:1001 ${{ env.DOCKER_HUB_USER }}/${{ env.DOCKER_IMAGE_NAME }}:${{ steps.increment_version.outputs.version }}
