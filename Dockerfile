@@ -9,6 +9,5 @@ FROM openjdk:17-jdk-slim
 ARG JAR_VERSION
 RUN useradd -m appuser
 USER appuser
-COPY --from=build /app/build/libs/*.jar .
-RUN ls
+COPY --from=build /app/build/libs/*.jar app.jar
 CMD ["java", "-jar", "app.jar"]
