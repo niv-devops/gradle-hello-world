@@ -43,7 +43,7 @@ jobs:
         
       - name: List files in build/libs
         run: |
-          ls gradle-hello-world/build/libs
+          ls ./build/libs
 
       - name: Create Docker image
         run: |
