@@ -7,7 +7,7 @@ Pipeline with GitHub Actions features automatic versioning and Docker.
 ## Features
 - **Automatic versioning**: Increment the patch version of the JAR file with each workflow run.
 - **Gradle Wrapper build**: Compile Java code and package it into JAR files.
-- **Docker**: Build Docker image containing the artifact (Auto tagged with the version) and publish it to Docker Hub.
+- **Docker**: Build Docker image containing the artifact (Auto tagged version) and publish it to Docker Hub.
 - **Update repo**: Automatically push changes to the repository.
 
 ## Tasks
