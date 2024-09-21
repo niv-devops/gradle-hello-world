@@ -1,5 +1,5 @@
 # Stage 1: Build the application
-FROM gradle:7.4.2-jdk17 AS build
+FROM gradle:8.10.1-jdk17 AS build
 WORKDIR /app
 COPY . .
 RUN gradle shadowJar

@@ -24,7 +24,7 @@ jobs:
       - name: Increment patch version
         id: increment_version
         run: |
-          ./increment_version.sh
+          ./scripts/increment_version.sh
           
       - name: Login to Docker Hub
         uses: docker/login-action@v3
@@ -43,7 +43,7 @@ jobs:
           push: true
 
       - name: Push changes back to repo
-        run: ./push_to_repo.sh ${{ steps.increment_version.outputs.version }}
+        run: ./scripts/push_to_repo.sh ${{ steps.increment_version.outputs.version }}
           
       - name: Run Docker container
         run: |
