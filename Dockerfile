@@ -3,6 +3,7 @@ FROM gradle:7.4.2-jdk17 AS build
 WORKDIR /app
 COPY . .
 RUN gradle shadowJar
+RUN ls build/libs/
 
 # Stage 2: Create the runtime image
 FROM openjdk:17-jdk-slim
