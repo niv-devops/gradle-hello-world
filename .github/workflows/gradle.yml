@@ -40,10 +40,6 @@ jobs:
 
       - name: Package into JAR
         run: ./gradlew shadowJar --info
-        
-      - name: List files in build/libs
-        run: |
-          ls ./build/libs
           
       - name: Create Docker image
         run: |
