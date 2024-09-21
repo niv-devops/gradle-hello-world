@@ -39,7 +39,11 @@ jobs:
         run: ./gradlew build
 
       - name: Package into JAR
-        run: ./gradlew shadowJar --info 
+        run: ./gradlew shadowJar --info
+        
+      - name: List files in build/libs
+        run: |
+          ls gradle-hello-world/build/libs
 
       - name: Create Docker image
         run: |
