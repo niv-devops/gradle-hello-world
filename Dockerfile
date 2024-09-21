@@ -11,5 +11,5 @@ RUN useradd -m appuser
 USER appuser
 WORKDIR /app
 RUN ls build/libs/
-COPY --from=build build/libs/gradle-hello-world-${JAR_VERSION}-all.jar app.jar
+COPY --from=build /app/build/libs/*.jar app.jar
 CMD ["java", "-jar", "app.jar"]
