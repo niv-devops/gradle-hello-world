@@ -3,6 +3,5 @@ ARG JAR_VERSION
 RUN useradd -m appuser
 USER appuser
 WORKDIR /app
-COPY build/libs/*.jar ./
-ENTRYPOINT ["sh", "-c"]
-CMD ["java -jar gradle-hello-world-${JAR_VERSION}-all.jar"]
+COPY build/libs/gradle-hello-world-${JAR_VERSION}-all.jar gradle-hello-world-all.jar
+CMD ["java", "-jar", "gradle-hello-world-all.jar"]
