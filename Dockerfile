@@ -10,6 +10,6 @@ ARG JAR_VERSION
 RUN useradd -m appuser
 USER appuser
 WORKDIR /app
-RUN ls build/libs/
 COPY --from=build /app/build/libs/*.jar app.jar
+RUN ls build/libs/
 CMD ["java", "-jar", "app.jar"]
