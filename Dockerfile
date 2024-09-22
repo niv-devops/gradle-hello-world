@@ -7,7 +7,7 @@ RUN ./gradlew build shadowJar
 # Stage 2: Create the runtime image
 FROM openjdk:17-jdk-slim
 RUN useradd -m appuser
-USER appuser
 COPY --from=build . .
 RUN ls
+USER appuser
 CMD ["java", "-jar", "gradle-hello-world-all.jar"]
