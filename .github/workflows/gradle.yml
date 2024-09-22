@@ -45,19 +45,17 @@ jobs:
           context: .
           file: Dockerfile
           tags: ${{ env.DOCKER_HUB_USER }}/${{ env.DOCKER_IMAGE_NAME }}:${{ steps.increment_version.outputs.version }}
-          build-args: |
-            JAR_VERSION=${{ steps.increment_version.outputs.version }}
           push: true
+          
+      - name: Run Docker container
+        run: |
+          docker run --rm ${{ env.DOCKER_HUB_USER }}/${{ env.DOCKER_IMAGE_NAME }}:${{ steps.increment_version.outputs.version }}
 
       - name: Push changes back to repo
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && ${{ github.triggering_actor != 'actions-user' }}
         run: |
           git config user.email "action@github.com"
           git config user.name "GitHub Actions"
           git add .
           git commit -m "Workflow complete. Changed version to ${{ steps.increment_version.outputs.version }}"
           git push origin master
-          
-      - name: Run Docker container
-        run: |
-          docker run --rm --user 1001:1001 ${{ env.DOCKER_HUB_USER }}/${{ env.DOCKER_IMAGE_NAME }}:${{ steps.increment_version.outputs.version }}
