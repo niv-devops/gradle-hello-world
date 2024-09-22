@@ -8,5 +8,5 @@ RUN ./gradlew build shadowJar
 FROM openjdk:17-jdk-slim
 RUN useradd -m appuser
 USER appuser
-COPY --from=build /app/build/libs/*.jar app.jar
-CMD ["java", "-jar", "app.jar"]
+COPY --from=build /app/build/libs/gradle-hello-world-${JAR_VERSION}-all.jar gradle-hello-world-all.jar
+CMD ["java", "-jar", "gradle-hello-world-all.jar"]
