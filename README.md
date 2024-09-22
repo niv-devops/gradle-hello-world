@@ -9,7 +9,7 @@ Pipeline with GitHub Actions features automatic versioning and Docker.
 - **Gradle Wrapper build**: Compile Java code and package it into JAR files.
 - **Docker**: Build Docker image containing the artifact (Auto tagged version) and publish it to Docker Hub.
 - **Update repo**: Automatically push changes to the repository.
-- **Multistage Docker**: A second pipeline implements a multistage Dockerfile for some of the features.
+- **Multistage Docker**: Build and compile step are implemented in a multistage Dockerfile.
 
 ## Tasks
 ```
