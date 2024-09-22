@@ -45,6 +45,8 @@ jobs:
           context: .
           file: Dockerfile
           tags: ${{ env.DOCKER_HUB_USER }}/${{ env.DOCKER_IMAGE_NAME }}:${{ steps.increment_version.outputs.version }}
+          build-args: |
+            JAR_VERSION=${{ steps.increment_version.outputs.version }}
           push: true
           
       - name: Run Docker container
