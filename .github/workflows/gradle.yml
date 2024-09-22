@@ -41,18 +41,18 @@ jobs:
 
       - name: Package into JAR
         run: ./gradlew shadowJar
-          
-      - name: Create Docker image
-        run: |
-          docker build -t ${{ env.DOCKER_HUB_USER }}/${{ env.DOCKER_IMAGE_NAME }}:${{ steps.increment_version.outputs.version }} \
-          --build-arg JAR_VERSION=${{ steps.increment_version.outputs.version }} .
-
+        
       - name: Login to Docker Hub
         if: github.event_name != 'pull_request'
         uses: docker/login-action@v3
         with:
           username: ${{ env.DOCKER_HUB_USER }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
+          
+      - name: Create Docker image
+        run: |
+          docker build -t ${{ env.DOCKER_HUB_USER }}/${{ env.DOCKER_IMAGE_NAME }}:${{ steps.increment_version.outputs.version }} \
+          --build-arg JAR_VERSION=${{ steps.increment_version.outputs.version }} .
 
       - name: Publish Docker image
         if: github.event_name != 'pull_request'

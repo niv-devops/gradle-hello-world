@@ -38,7 +38,7 @@ jobs:
         uses: docker/build-push-action@23c657a01f105567f668c7596ce8e5a038da2555 # V6.7.0
         with:
           context: .
-          file: ./Dockerfile
+          file: ./Dockerfile.multi
           tags: ${{ env.DOCKER_HUB_USER }}/${{ env.DOCKER_IMAGE_NAME }}:${{ steps.increment_version.outputs.version }}
           build-args: |
             JAR_VERSION=${{ steps.increment_version.outputs.version }}
