@@ -33,20 +33,21 @@ make the runnable jar executable, then use "java -jar gradle-hello-world-all.jar
    cd gradle-hello-world
    ```
 
-2. **Choose desired workflow**:
-   Choose among two workflows to match corresponding Dockerfile
-   Change file name of desired dockerfile to "Dockerfile"
-   ```
-   cd .gihub/workflows
-   ```   
-
 3. **Make changes and push to repository**:
-   Choose among two workflows ().gihub/workflows to match corresponding Dockerfile
+   Push to master will auto-trigger the pipeline
    ```
    git add .
    git commit -m "commit_message"
    git push origin master
-   ```   
+   ```
+   PR and merge will also auto-trigger the pipeline
+   ```
+   git switch -c brnach-name
+   git add .
+   git commit -m "commit_message"
+   git push origin brnach-name
+   # Review PR and merge to master
+   ``` 
 
 ## Optional
 Following commands were used in pipeline and can be executed directly:
